@@ -2,96 +2,109 @@
 
 #define SIZE 3
 
-// Function prototypes
-void inputMatrix(int matrix[SIZE][SIZE], char name);
-void displayMatrix(int matrix[SIZE][SIZE]);
-void addMatrices(int mat1[SIZE][SIZE], int mat2[SIZE][SIZE], int result[SIZE][SIZE]);
-void multiplyMatrices(int mat1[SIZE][SIZE], int mat2[SIZE][SIZE], int result[SIZE][SIZE]);
-void transposeMatrix(int matrix[SIZE][SIZE], int result[SIZE][SIZE]);
+static void inputMatrix(int matrix[SIZE][SIZE], char name);
+static void displayMatrix(const int matrix[SIZE][SIZE]);
+static void addMatrices(const int mat1[SIZE][SIZE], const int mat2[SIZE][SIZE], int result[SIZE][SIZE]);
+static void multiplyMatrices(const int mat1[SIZE][SIZE], const int mat2[SIZE][SIZE], int result[SIZE][SIZE]);
+static void transposeMatrix(const int matrix[SIZE][SIZE], int result[SIZE][SIZE]);
+static void printSectionTitle(const char *title);
+static void clearInputBuffer(void);
 
-int main() {
-    int matA[SIZE][SIZE], matB[SIZE][SIZE];
-    int sum[SIZE][SIZE], product[SIZE][SIZE], transposeA[SIZE][SIZE];
+int main(void) {
+    int matA[SIZE][SIZE];
+    int matB[SIZE][SIZE];
+    int sum[SIZE][SIZE];
+    int product[SIZE][SIZE];
+    int transposeA[SIZE][SIZE];
 
     printf("=== Matrix Operations (3x3) ===\n\n");
-    
-    // Get matrix inputs
+    printf("This program reads two matrices and displays their sum, product, and transpose.\n\n");
+
     inputMatrix(matA, 'A');
     inputMatrix(matB, 'B');
 
-    // 1. Matrix Addition
     addMatrices(matA, matB, sum);
-    printf("\n--- Matrix A + Matrix B ---\n");
+    printSectionTitle("Matrix A + Matrix B");
     displayMatrix(sum);
 
-    // 2. Matrix Multiplication
     multiplyMatrices(matA, matB, product);
-    printf("\n--- Matrix A * Matrix B ---\n");
+    printSectionTitle("Matrix A * Matrix B");
     displayMatrix(product);
 
-    // 3. Transpose of Matrix A
     transposeMatrix(matA, transposeA);
-    printf("\n--- Transpose of Matrix A ---\n");
+    printSectionTitle("Transpose of Matrix A");
     displayMatrix(transposeA);
 
     return 0;
 }
 
-// Function to input matrix elements
-void inputMatrix(int matrix[SIZE][SIZE], char name) {
-    printf("Enter elements for 3x3 Matrix %c:\n", name);
-    for (int i = 0; i < SIZE; i++) {
-        for (int j = 0; j < SIZE; j++) {
-            printf("Element [%d][%d]: ", i, j);
-            scanf("%d", &matrix[i][j]);
+static void inputMatrix(int matrix[SIZE][SIZE], char name) {
+    printf("Enter the 9 values for Matrix %c row by row.\n", name);
+
+    for (int row = 0; row < SIZE; row++) {
+        for (int col = 0; col < SIZE; col++) {
+            while (1) {
+                printf("Matrix %c[%d][%d]: ", name, row, col);
+
+                if (scanf("%d", &matrix[row][col]) == 1) {
+                    break;
+                }
+
+                printf("Invalid input. Please enter an integer.\n");
+                clearInputBuffer();
+            }
         }
     }
+
     printf("\n");
 }
 
-// Function to display a matrix
-void displayMatrix(int matrix[SIZE][SIZE]) {
-    for (int i = 0; i < SIZE; i++) {
-        for (int j = 0; j < SIZE; j++) {
-            printf("%d\t", matrix[i][j]);
+static void displayMatrix(const int matrix[SIZE][SIZE]) {
+    for (int row = 0; row < SIZE; row++) {
+        for (int col = 0; col < SIZE; col++) {
+            printf("%6d", matrix[row][col]);
         }
         printf("\n");
     }
 }
 
-// Function for Matrix Addition
-void addMatrices(int mat1[SIZE][SIZE], int mat2[SIZE][SIZE], int result[SIZE][SIZE]) {
-    for (int i = 0; i < SIZE; i++) {
-        for (int j = 0; j < SIZE; j++) {
-            result[i][j] = mat1[i][j] + mat2[i][j];
+static void addMatrices(const int mat1[SIZE][SIZE], const int mat2[SIZE][SIZE], int result[SIZE][SIZE]) {
+    for (int row = 0; row < SIZE; row++) {
+        for (int col = 0; col < SIZE; col++) {
+            result[row][col] = mat1[row][col] + mat2[row][col];
         }
     }
 }
 
-// Function for Matrix Multiplication
-void multiplyMatrices(int mat1[SIZE][SIZE], int mat2[SIZE][SIZE], int result[SIZE][SIZE]) {
-    // Initialize result matrix to 0
-    for (int i = 0; i < SIZE; i++) {
-        for (int j = 0; j < SIZE; j++) {
-            result[i][j] = 0;
-        }
-    }
+static void multiplyMatrices(const int mat1[SIZE][SIZE], const int mat2[SIZE][SIZE], int result[SIZE][SIZE]) {
+    for (int row = 0; row < SIZE; row++) {
+        for (int col = 0; col < SIZE; col++) {
+            int total = 0;
 
-    // Multiply matrices
-    for (int i = 0; i < SIZE; i++) {
-        for (int j = 0; j < SIZE; j++) {
-            for (int k = 0; k < SIZE; k++) {
-                result[i][j] += mat1[i][k] * mat2[k][j];
+            for (int index = 0; index < SIZE; index++) {
+                total += mat1[row][index] * mat2[index][col];
             }
+
+            result[row][col] = total;
         }
     }
 }
 
-// Function for Matrix Transpose
-void transposeMatrix(int matrix[SIZE][SIZE], int result[SIZE][SIZE]) {
-    for (int i = 0; i < SIZE; i++) {
-        for (int j = 0; j < SIZE; j++) {
-            result[j][i] = matrix[i][j];
+static void transposeMatrix(const int matrix[SIZE][SIZE], int result[SIZE][SIZE]) {
+    for (int row = 0; row < SIZE; row++) {
+        for (int col = 0; col < SIZE; col++) {
+            result[col][row] = matrix[row][col];
         }
+    }
+}
+
+static void printSectionTitle(const char *title) {
+    printf("\n--- %s ---\n", title);
+}
+
+static void clearInputBuffer(void) {
+    int ch;
+
+    while ((ch = getchar()) != '\n' && ch != EOF) {
     }
 }
