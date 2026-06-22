@@ -7,7 +7,6 @@ static void displayMatrix(const int matrix[SIZE][SIZE]);
 static void addMatrices(const int mat1[SIZE][SIZE], const int mat2[SIZE][SIZE], int result[SIZE][SIZE]);
 static void multiplyMatrices(const int mat1[SIZE][SIZE], const int mat2[SIZE][SIZE], int result[SIZE][SIZE]);
 static void transposeMatrix(const int matrix[SIZE][SIZE], int result[SIZE][SIZE]);
-static void printSectionTitle(const char *title);
 static void clearInputBuffer(void);
 
 int main(void) {
@@ -18,28 +17,27 @@ int main(void) {
     int transposeA[SIZE][SIZE];
 
     printf("=== Matrix Operations (3x3) ===\n\n");
-    printf("This program reads two matrices and displays their sum, product, and transpose.\n\n");
 
     inputMatrix(matA, 'A');
     inputMatrix(matB, 'B');
 
     addMatrices(matA, matB, sum);
-    printSectionTitle("Matrix A + Matrix B");
+    printf("\nSum of Matrix A and Matrix B:\n");
     displayMatrix(sum);
 
     multiplyMatrices(matA, matB, product);
-    printSectionTitle("Matrix A * Matrix B");
+    printf("\nProduct of Matrix A and Matrix B:\n");
     displayMatrix(product);
 
     transposeMatrix(matA, transposeA);
-    printSectionTitle("Transpose of Matrix A");
+    printf("\nTranspose of Matrix A:\n");
     displayMatrix(transposeA);
 
     return 0;
 }
 
 static void inputMatrix(int matrix[SIZE][SIZE], char name) {
-    printf("Enter the 9 values for Matrix %c row by row.\n", name);
+    printf("Enter 9 values for Matrix %c, row by row.\n", name);
 
     for (int row = 0; row < SIZE; row++) {
         for (int col = 0; col < SIZE; col++) {
@@ -62,7 +60,7 @@ static void inputMatrix(int matrix[SIZE][SIZE], char name) {
 static void displayMatrix(const int matrix[SIZE][SIZE]) {
     for (int row = 0; row < SIZE; row++) {
         for (int col = 0; col < SIZE; col++) {
-            printf("%6d", matrix[row][col]);
+            printf("%d\t", matrix[row][col]);
         }
         printf("\n");
     }
@@ -96,10 +94,6 @@ static void transposeMatrix(const int matrix[SIZE][SIZE], int result[SIZE][SIZE]
             result[col][row] = matrix[row][col];
         }
     }
-}
-
-static void printSectionTitle(const char *title) {
-    printf("\n--- %s ---\n", title);
 }
 
 static void clearInputBuffer(void) {
