@@ -1,31 +1,30 @@
 # Matrix Operations
 
-This project is a small C program that demonstrates basic 3x3 matrix operations.
-It asks for values for two matrices, then prints the following results:
+This is a small C program for 3x3 matrix operations.
+It takes two matrices as input and shows:
 
 - the sum of Matrix A and Matrix B
 - the product of Matrix A and Matrix B
 - the transpose of Matrix A
 
-## What the Program Does
+## About
 
-The program is designed for beginners who want to understand how matrix operations work in C.
-It uses fixed-size 3x3 integer arrays and simple nested loops to perform each calculation.
+The program uses fixed-size 3x3 integer arrays and simple loops in C.
 
 ## Requirements
 
-- A C compiler such as GCC, Clang, or MinGW
+- A C compiler like GCC or MinGW
 - A terminal or command prompt
 
 ## Build
 
-Compile the program from the repository folder:
+Compile the program in the repository folder:
 
 ```bash
 gcc MATRIX_OPS.C -o matrix_ops.exe
 ```
 
-If you are on Linux or macOS, you can choose a different output name if you prefer:
+If you want a different output name on Linux or macOS:
 
 ```bash
 gcc MATRIX_OPS.C -o matrix_ops
@@ -37,7 +36,7 @@ gcc MATRIX_OPS.C -o matrix_ops
 matrix_ops.exe
 ```
 
-On Linux or macOS, run the binary name you chose during compilation:
+On Linux or macOS, run the file name you used when building:
 
 ```bash
 ./matrix_ops
@@ -49,11 +48,11 @@ On Linux or macOS, run the binary name you chose during compilation:
 2. Enter 9 integers for Matrix B.
 3. Read the printed result for each operation.
 
-The input order is row by row, starting from element `[0][0]`.
+Input is entered row by row.
 
 ## Example
 
-If Matrix A is:
+Example Matrix A:
 
 ```text
 1 2 3
@@ -61,7 +60,7 @@ If Matrix A is:
 7 8 9
 ```
 
-and Matrix B is:
+Example Matrix B:
 
 ```text
 9 8 7
@@ -69,13 +68,13 @@ and Matrix B is:
 3 2 1
 ```
 
-the program will display the sum, product, and transpose of Matrix A.
+The program prints the sum, product, and transpose after the input is entered.
 
 ## Files
 
-- [MATRIX_OPS.C](MATRIX_OPS.C) - main source code
-- [README.md](README.md) - project overview and usage guide
+- [MATRIX_OPS.C](MATRIX_OPS.C) - main C file
+- [README.md](README.md) - this file
 
 ## Repository
 
-Remote source: https://github.com/kansaldhruv/CodeAlpha_MATRIX-OPERATIONS.git
+https://github.com/kansaldhruv/CodeAlpha_MATRIX-OPERATIONS.git
